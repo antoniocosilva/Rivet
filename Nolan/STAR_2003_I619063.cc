@@ -51,7 +51,6 @@ namespace Rivet {
       book(sow["sow30_40"], "sow30_4");
       book(sow["sow40_60"], "sow40_60");
       book(sow["sow60_80"], "sow60_80");
-      book(Rcp["Rcp0_5_over_5_10"], "Rcp0_5_over_5_10");
       
       string refnameCentRatio05_4060 = mkAxisCode(4,1,1);
       book(Rcp["Rcp0_5_over_40_60"], refnameCentRatio05_4060);
