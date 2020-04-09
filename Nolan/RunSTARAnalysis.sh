@@ -1,5 +1,5 @@
  #!/bin/bash
-ANALYSIS_DIR=/nics/c/home/aolivei6/Nolan
+ANALYSIS_DIR=$PWD
 PYTHIA_EX_DIR=/nics/a/proj/UTK0019/Pythia8/pythia8243/examples
 #cd $ANALYSIS_DIR/Centrality
 #rm *.so
