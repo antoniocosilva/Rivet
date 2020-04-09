@@ -43,6 +43,7 @@ namespace Rivet {
       book(chSpectrum["chSpectrum20_30"], 1, 1, 4);
       book(chSpectrum["chSpectrum30_40"], 1, 1, 5);
       book(chSpectrum["chSpectrum40_60"], 1, 1, 6);
+      book(chSpectrum["chSpectrum60_80"], 1, 1, 7);
       book(sow["sow0_5"], "sow0_5");
       book(sow["sow5_10"], "sow5_10");
       book(sow["sow0_5"], "sow10_20");
@@ -56,8 +57,6 @@ namespace Rivet {
       book(Rcp["Rcp0_5_over_40_60"], refnameCentRatio05_4060);
       
       string refnameCentRatio05_6080 = mkAxisCode(4,1,2);
-      const Scatter2D& refdataCentRatio05_6080 = refData(refnameCentRatio05_6080);
-      book(chSpectrum["chSpectrum60_80"], refnameCentRatio05_6080 + "_6080", refdataCentRatio05_6080);
       book(Rcp["Rcp0_5_over_60_80"], refnameCentRatio05_6080);
       
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
