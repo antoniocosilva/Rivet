@@ -46,11 +46,11 @@ namespace Rivet {
       book(chSpectrum["chSpectrum60_80"], 1, 1, 7);
       book(sow["sow0_5"], "sow0_5");
       book(sow["sow5_10"], "sow5_10");
-      book(sow["sow0_5"], "sow10_20");
-      book(sow["sow5_10"], "sow20_30");
-      book(sow["sow0_5"], "sow30_4");
-      book(sow["sow5_10"], "sow40_60");
-      book(sow["sow5_10"], "sow60_80");
+      book(sow["sow10_20"], "sow10_20");
+      book(sow["sow20_30"], "sow20_30");
+      book(sow["sow30_40"], "sow30_4");
+      book(sow["sow40_60"], "sow40_60");
+      book(sow["sow60_80"], "sow60_80");
       book(Rcp["Rcp0_5_over_5_10"], "Rcp0_5_over_5_10");
       
       string refnameCentRatio05_4060 = mkAxisCode(4,1,1);
