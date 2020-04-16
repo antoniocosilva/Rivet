@@ -31,6 +31,7 @@ namespace Rivet {
       // the basic final-state projection: 
       // all final-state particles within 
       // the given eta acceptance
+      //NOLAN: You should change this to the pseudorapidity in the paper
       const FinalState fs(Cuts::abseta < 4.9 && Cuts::abscharge > 0);
       declare(fs,"fs");
       
@@ -83,6 +84,7 @@ namespace Rivet {
       {
           if(c < 5.)
           {
+	    //can do p.pT()/GeV,1.0/(p.pT()/GeV).  Add to all centralities.
               chSpectrum["chSpectrum0_5"]->fill(p.pT()/GeV);
               sow["sow0_5"]->fill();
           }
@@ -124,7 +126,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
+      //These lines normalize per event and pT bin width.
+      //You need to also scale by 1.0/(2.0*3.14159*[eta acceptance])
       chSpectrum["chSpectrum0_5"]->scaleW(1./sow["sow0_5"]->sumW());
       chSpectrum["chSpectrum5_10"]->scaleW(1./sow["sow5_10"]->sumW());
       chSpectrum["chSpectrum10_20"]->scaleW(1./sow["sow10_20"]->sumW());
@@ -136,8 +139,11 @@ namespace Rivet {
       //normalize(_h["YYYY"]); // normalize to unity
       //scale(_h["ZZZZ"], crossSection()/picobarn/sumOfWeights()); // norm to cross section
       
-      //
+      //Look for TAA (nuclear overlap integral) in the paper.  You want to scale each spectrum by this, so
+      //First: scale by [TAA 40-60]/[TAA 0-5]
       divide(chSpectrum["chSpectrum0_5"], chSpectrum["chSpectrum40_60"], Rcp["Rcp0_5_over_40_60"]);
+      //Rcp["Rcp0_5_over_40_60"]->ScaleW(1.0/[your scale factor]);
+      //First: scale by [TAA 60-80]/[TAA 0-5]
       divide(chSpectrum["chSpectrum0_5"], chSpectrum["chSpectrum60_80"], Rcp["Rcp0_5_over_60_80"]);
 
     }
