@@ -145,7 +145,7 @@ namespace Rivet {
  
       divide(chSpectrum["chSpectrum0_5"], chSpectrum["chSpectrum40_60"], Rcp["Rcp0_5_over_40_60"]);
       //Rcp["Rcp0_5_over_40_60"]->ScaleW(1.0/[your scale factor]);
-      //Rcp["Rcpo_5_over_40_60"] -> scaleW(1.0/((90.0/42.0)/(965./42.)));
+      Rcp["Rcp0_5_over_40_60"]->scaleY(90.65/1065.4);
       //First: scale by [TAA 60-80]/[TAA 0-5]
       
       divide(chSpectrum["chSpectrum0_5"], chSpectrum["chSpectrum60_80"], Rcp["Rcp0_5_over_60_80"]);
