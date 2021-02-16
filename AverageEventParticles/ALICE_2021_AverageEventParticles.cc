@@ -13,66 +13,55 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #define _USE_MATH_DEFINES
 
-namespace Rivet {  
+namespace Rivet {
   /// @brief Centrality projection for PHENIX AuAu.
-class RHIC_2019_CentralityCalibration : public Analysis {
-  
+class ALICE_2021_AverageEventParticles : public Analysis {
+
   public:
-    
-    RHIC_2019_CentralityCalibration() : Analysis("RHIC_2019_CentralityCalibration") { };
+
+    //RHIC_2019_CentralityCalibration() : Analysis("ALICE_2021_AverageEventParticles") { };
+    DEFAULT_RIVET_ANALYSIS_CTOR(ALICE_2021_AverageEventParticles);
   /// Book histograms and initialise projections before the run
   void init() {
     // One projection for the actual observable, and one for the
     // generated impact parameter.
-      
-    string experiment = getOption<string>("exp","STAR");
-    set<string> done;  
-    MSG_INFO("RHIC Experiment: " << experiment);  
-    declare(RHICCentrality(experiment), "Centrality");
-    declare(ImpactParameterProjection(), "IMP");
+
+    //string cuts = getOption<string>("cuts","");
+    //MSG_INFO("RHIC Experiment: " << experiment);
+
+
+    const ALICE::PrimaryParticles app(Cuts::abseta < 0.8 && Cuts::pT > 0.150*GeV && Cuts::abscharge > 0);
+    declare(app, "app");
 
     // The calibration histogram:
-    book(_calib, "CMULT", 100, 0.0, 2000.0);
-
-    // If histogram was pre-loaded, the calibration is done.
-    //_done = ( _calib->numEntries() > 0 );
-
-    // The alternative histogram based on impact parameter. Note that
-    // it MUST be named the same as the histogram for the experimental
-    // observable with an added _IMP suffix for the Pecentile<>
-    // binning to work properly.
-    book(_impcalib, "CMULT_IMP", 400, 0.0, 20.0);
+    book(_calib, "AVERAGE_N", 1, 0., 1.);
 
 
   }
-  
+
   /// Perform the per-event analysis
   void analyze(const Event& event) {
-    
+
     // The alternative centrality based on generated impact
     // parameter, assumes that the generator does not describe the
     // full final state, and should therefore be filled even if the
     // event is not triggered.
-      _impcalib->fill(apply<SingleValueProjection>(event, "IMP")());
-      
-      _calib->fill(apply<SingleValueProjection>(event, "Centrality")());
-    
+
+      _calib->fill(apply<ALICE::PrimaryParticles>(event, "app").particles().size());
+
   }
-  
+
   /// Finalize
   void finalize() {
 
-    _calib->normalize();
-    _impcalib->normalize();
+
 
   }
 
   /// The calibration histograms.
-  Histo1DPtr _calib;
-  Histo1DPtr _impcalib;
+  Profile1DPtr _calib;
   };
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(RHIC_2019_CentralityCalibration); 
+  DECLARE_RIVET_PLUGIN(ALICE_2021_AverageEventParticles);
 }
-  
