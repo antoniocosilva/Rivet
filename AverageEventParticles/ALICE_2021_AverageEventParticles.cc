@@ -3,7 +3,6 @@
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
 #include "Rivet/Projections/ImpactParameterProjection.hh"
-#include "RHICCentrality.hh"
 #include "Rivet/Config/RivetCommon.hh"
 #include "Rivet/AnalysisHandler.hh"
 #include "Rivet/AnalysisInfo.hh"
@@ -11,6 +10,8 @@
 #include "Rivet/Projections/GeneratedPercentileProjection.hh"
 #include "Rivet/Projections/UserCentEstimate.hh"
 #include "Rivet/Projections/CentralityProjection.hh"
+#include "Rivet/Tools/AliceCommon.hh"
+#include "Rivet/Projections/AliceCommon.hh"
 #define _USE_MATH_DEFINES
 
 namespace Rivet {
@@ -47,14 +48,19 @@ class ALICE_2021_AverageEventParticles : public Analysis {
     // full final state, and should therefore be filled even if the
     // event is not triggered.
 
-      _calib->fill(apply<ALICE::PrimaryParticles>(event, "app").particles().size());
+      _calib->fill(0.5, apply<ALICE::PrimaryParticles>(event, "app").particles().size());
+
+      Particles particles = apply<ALICE::PrimaryParticles>(event, "app").particlesByPt();
+      cout << "New event" << endl;
+      for(auto p : particles)
+      {
+          cout << p.pT()/GeV << endl;
+      }
 
   }
 
   /// Finalize
   void finalize() {
-
-
 
   }
 

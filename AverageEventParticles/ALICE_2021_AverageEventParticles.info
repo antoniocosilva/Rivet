@@ -1,4 +1,4 @@
-Name: RHIC_2019_CentralityCalibration
+Name: ALICE_2021_AverageEventParticles
 Year: 2019
 Summary: PHENIX Centrality Calibration 
 Experiment: PHENIX
@@ -17,4 +17,3 @@ Description:
   'Calibration of the centrality percentile using charged particles at central rapidity ($\eta < 0.5$)'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
-
